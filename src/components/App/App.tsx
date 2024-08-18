@@ -7,17 +7,19 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
+import { Image } from "../../types";
 
 export default function App() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
-  const [largeImageURL, setLargeImageURL] = useState(null);
-  const scrollPositionRef = useRef(0);
-  const galleryRef = useRef(null);
+  const [images, setImages] = useState<Image[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [largeImageURL, setLargeImageURL] = useState<string | null>(null);
+
+  const scrollPositionRef = useRef<number>(0);
+  const galleryRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (images.length > 0 && galleryRef.current) {
@@ -28,7 +30,7 @@ export default function App() {
     }
   }, [images, loading]);
 
-  const handleSearchSubmit = async (newQuery) => {
+  const handleSearchSubmit = async (newQuery: string) => {
     if (newQuery.trim() === "") {
       toast.error("Please enter a search query");
       return;
@@ -66,7 +68,7 @@ export default function App() {
     }
   };
 
-  const handleImageClick = (largeImageURL) => {
+  const handleImageClick = (largeImageURL: string) => {
     setLargeImageURL(largeImageURL);
     setModalOpen(true);
   };

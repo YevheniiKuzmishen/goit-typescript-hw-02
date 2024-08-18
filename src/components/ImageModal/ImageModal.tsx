@@ -1,7 +1,17 @@
 import Modal from "react-modal";
 import css from "./ImageModal.module.css";
 
-export default function ImageModal({ isOpen, onClose, largeImageURL }) {
+interface ImageModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  largeImageURL: string | null;
+}
+
+export default function ImageModal({
+  isOpen,
+  onClose,
+  largeImageURL,
+}: ImageModalProps) {
   return (
     <Modal
       isOpen={isOpen}
